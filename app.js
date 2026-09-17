@@ -5,7 +5,7 @@ const notice=document.querySelector('#notice');
 let noticeTimer;
 function notify(message){notice.textContent=message;notice.classList.add('show');clearTimeout(noticeTimer);noticeTimer=setTimeout(()=>notice.classList.remove('show'),4200)}
 
-const TOKEN_CA='';
+const TOKEN_CA='0x380f886cb64d2e4942bcec1d2b3deff45da7aafd';
 const caValue=document.querySelector('#ca-value');
 const copyCA=document.querySelector('#copy-ca');
 if(/^0x[a-fA-F0-9]{40}$/.test(TOKEN_CA)){caValue.textContent=TOKEN_CA;copyCA.disabled=false;copyCA.textContent='COPY CA';copyCA.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(TOKEN_CA);copyCA.textContent='COPIED';notify('Official contract address copied.');setTimeout(()=>copyCA.textContent='COPY CA',1800)}catch{notify('Copy failed. Select the address manually.')}})}
