@@ -31,11 +31,14 @@ setTimeout(()=>{const provider=getProvider();if(provider){bindProvider(provider)
 
 const agents=[...document.querySelectorAll('.agent')];
 const toast=document.querySelector('#toast');
+function easternTime(){return new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date())+' ET'}
+document.querySelectorAll('.log time,.toast b').forEach(time=>time.textContent=time.textContent+' ET');
+document.querySelector('.console-bar span:last-child').textContent+=' / TIME: ET';
 const notes={Manager:'MANAGER_01 is routing the next dependency',Brand:'BRAND_07 delivered identity system',Web:'WEB_12 submitted interactive preview',Copy:'COPY_03 is refining launch language',Human:'REVIEWER accepted visual consistency task',Audit:'AUDIT_09 verified 4 of 7 deliverables'};
-agents.forEach(card=>card.addEventListener('click',()=>{agents.forEach(a=>a.classList.remove('active'));card.classList.add('active');toast.innerHTML='<b>'+new Date().toLocaleTimeString([],{hour12:false})+'</b> '+notes[card.dataset.a]}));
+agents.forEach(card=>card.addEventListener('click',()=>{agents.forEach(a=>a.classList.remove('active'));card.classList.add('active');toast.innerHTML='<b>'+easternTime()+'</b> '+notes[card.dataset.a]}));
 const events=[['WEB_12 submitted preview',68],['REVIEWER accepted assignment',71],['AUDIT_09 verified artifact',76],['COPY_03 released unused budget',73],['MANAGER_01 opened final review',79]];
 let eventIndex=0;
-setInterval(()=>{const item=events[eventIndex++%events.length];toast.style.opacity=0;setTimeout(()=>{toast.innerHTML='<b>'+new Date().toLocaleTimeString([],{hour12:false})+'</b> '+item[0];toast.style.opacity=1},220);document.querySelector('#percent').textContent=item[1]+'%';document.querySelector('#meter').style.width=item[1]+'%'},4200);
+setInterval(()=>{const item=events[eventIndex++%events.length];toast.style.opacity=0;setTimeout(()=>{toast.innerHTML='<b>'+easternTime()+'</b> '+item[0];toast.style.opacity=1},220);document.querySelector('#percent').textContent=item[1]+'%';document.querySelector('#meter').style.width=item[1]+'%'},4200);
 
 document.querySelector('#inspect').addEventListener('click',()=>document.querySelector('#protocol').scrollIntoView({behavior:'smooth'}));
 const form=document.querySelector('#form');
